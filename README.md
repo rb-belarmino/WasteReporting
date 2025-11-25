@@ -45,24 +45,91 @@ A API estará disponível em: `http://localhost:5001/swagger`
     dotnet test
     ```
 
-## 🧪 Como Testar (Passo a Passo)
+## 🧪 Guia de Testes (Passo a Passo Detalhado)
 
-### 1. Criar Conta
-*   **POST** `/auth/register`
-*   Body: `{"username": "teste", "email": "teste@email.com", "password": "123"}`
+### 1. Criar Conta (Registro)
+*   **Rota**: `POST /auth/register`
+*   **Descrição**: Cria um novo usuário no sistema.
+*   **Body (JSON)**:
+    ```json
+    {
+      "username": "usuario_teste",
+      "email": "teste@email.com",
+      "password": "123"
+    }
+    ```
+*   **Retorno Esperado (201 Created)**:
+    ```json
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "username": "usuario_teste",
+      "email": "teste@email.com",
+      "role": "User"
+    }
+    ```
 
-### 2. Login
-*   **POST** `/auth/login`
-*   Body: `{"email": "teste@email.com", "password": "123"}`
-*   **Copie o Token** retornado.
+### 2. Login (Autenticação)
+*   **Rota**: `POST /auth/login`
+*   **Descrição**: Autentica o usuário e retorna o Token JWT.
+*   **Body (JSON)**:
+    ```json
+    {
+      "email": "teste@email.com",
+      "password": "123"
+    }
+    ```
+*   **Retorno Esperado (200 OK)**:
+    ```json
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "username": "usuario_teste",
+      "email": "teste@email.com",
+      "role": "User"
+    }
+    ```
+    ⚠️ **Importante**: Copie o valor do `token` para usar nos próximos passos.
 
-### 3. Autenticar no Swagger
-*   Clique no cadeado (**Authorize**).
-*   Digite: `Bearer SEU_TOKEN_AQUI`.
+### 3. Configurar Autenticação (Swagger)
+1.  No topo da página do Swagger, clique no botão **Authorize** (cadeado).
+2.  No campo "Value", digite: `Bearer SEU_TOKEN_AQUI` (ex: `Bearer eyJhb...`).
+3.  Clique em **Authorize** e depois em **Close**.
 
-### 4. Usar a API
-*   **POST** `/api/denuncias`: Criar denúncia.
-*   **GET** `/api/denuncias/minhas?page=1&pageSize=10`: Listar suas denúncias.
+### 4. Criar Denúncia
+*   **Rota**: `POST /api/denuncias`
+*   **Descrição**: Cria uma nova denúncia vinculada ao usuário logado.
+*   **Body (JSON)**:
+    ```json
+    {
+      "localizacao": "Rua das Flores, 123 - Centro",
+      "descricao": "Entulho acumulado na calçada atrapalhando a passagem."
+    }
+    ```
+*   **Retorno Esperado (201 Created)**:
+    ```json
+    {
+      "id": 1,
+      "localizacao": "Rua das Flores, 123 - Centro",
+      "descricao": "Entulho acumulado na calçada atrapalhando a passagem.",
+      "status": "PENDENTE",
+      "dataCriacao": "2024-11-24T22:00:00Z",
+      "usuarioNome": "usuario_teste"
+    }
+    ```
+
+### 5. Listar Minhas Denúncias
+*   **Rota**: `GET /api/denuncias/minhas`
+*   **Parâmetros (Opcionais)**: `page=1`, `pageSize=10`
+*   **Descrição**: Lista apenas as denúncias feitas por você.
+*   **Retorno Esperado (200 OK)**: Lista de denúncias (JSON Array).
+
+### 6. Listar Todas (Apenas Admin)
+*   **Rota**: `GET /api/denuncias`
+*   **Descrição**: Lista denúncias de *todos* os usuários. Requer usuário com `Role = "Admin"`.
+
+### 7. Atualizar Status (Apenas Admin)
+*   **Rota**: `PUT /api/denuncias/{id}/status`
+*   **Body (JSON - String)**: `"RESOLVIDO"`
+*   **Descrição**: Atualiza o status de uma denúncia específica.
 
 ## 🏗️ Estrutura do Projeto
 *   **Controllers**: Endpoints da API.
