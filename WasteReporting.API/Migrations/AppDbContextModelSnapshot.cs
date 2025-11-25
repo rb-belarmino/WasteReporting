@@ -22,6 +22,59 @@ namespace WasteReporting.API.Migrations
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WasteReporting.API.Models.Coleta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataColeta")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<int>("DestinoFinalId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("PontoColetaId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("RecicladorId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinoFinalId");
+
+                    b.HasIndex("PontoColetaId");
+
+                    b.HasIndex("RecicladorId");
+
+                    b.ToTable("Coletas", (string)null);
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.ColetaResiduo", b =>
+                {
+                    b.Property<int>("ColetaId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("ResiduoId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<double>("PesoKg")
+                        .HasColumnType("BINARY_DOUBLE");
+
+                    b.HasKey("ColetaId", "ResiduoId");
+
+                    b.HasIndex("ResiduoId");
+
+                    b.ToTable("ColetaResiduos", (string)null);
+                });
+
             modelBuilder.Entity("WasteReporting.API.Models.Denuncia", b =>
                 {
                     b.Property<int>("Id")
@@ -52,7 +105,83 @@ namespace WasteReporting.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Denuncias");
+                    b.ToTable("Denuncias", (string)null);
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.DestinoFinal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DestinosFinais", (string)null);
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.PontoColeta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Localizacao")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Responsavel")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PontosColeta", (string)null);
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.Reciclador", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recicladores", (string)null);
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.Residuo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Residuos", (string)null);
                 });
 
             modelBuilder.Entity("WasteReporting.API.Models.User", b =>
@@ -84,7 +213,53 @@ namespace WasteReporting.API.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.Coleta", b =>
+                {
+                    b.HasOne("WasteReporting.API.Models.DestinoFinal", "DestinoFinal")
+                        .WithMany()
+                        .HasForeignKey("DestinoFinalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WasteReporting.API.Models.PontoColeta", "PontoColeta")
+                        .WithMany()
+                        .HasForeignKey("PontoColetaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WasteReporting.API.Models.Reciclador", "Reciclador")
+                        .WithMany()
+                        .HasForeignKey("RecicladorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DestinoFinal");
+
+                    b.Navigation("PontoColeta");
+
+                    b.Navigation("Reciclador");
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.ColetaResiduo", b =>
+                {
+                    b.HasOne("WasteReporting.API.Models.Coleta", "Coleta")
+                        .WithMany("ColetaResiduos")
+                        .HasForeignKey("ColetaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WasteReporting.API.Models.Residuo", "Residuo")
+                        .WithMany()
+                        .HasForeignKey("ResiduoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coleta");
+
+                    b.Navigation("Residuo");
                 });
 
             modelBuilder.Entity("WasteReporting.API.Models.Denuncia", b =>
@@ -96,6 +271,11 @@ namespace WasteReporting.API.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WasteReporting.API.Models.Coleta", b =>
+                {
+                    b.Navigation("ColetaResiduos");
                 });
 #pragma warning restore 612, 618
         }

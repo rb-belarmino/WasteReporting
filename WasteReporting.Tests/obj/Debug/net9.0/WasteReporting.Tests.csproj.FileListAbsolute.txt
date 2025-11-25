@@ -133,3 +133,5 @@
 /Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/obj/Debug/net9.0/WasteReporting.Tests.pdb
 /Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/obj/Debug/net9.0/WasteReporting.Tests.genruntimeconfig.cache
 /Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/obj/Debug/net9.0/ref/WasteReporting.Tests.dll
+/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/bin/Debug/net9.0/WasteReporting.API.xml
+/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/obj/Debug/net9.0/WasteReporting.Tests.sourcelink.json

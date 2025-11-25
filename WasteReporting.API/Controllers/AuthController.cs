@@ -16,12 +16,12 @@ public class AuthController : ControllerBase
     }
 
     /// <summary>
-    /// Registra um novo usuário.
+    /// Registers a new user.
     /// </summary>
-    /// <param name="dto">Dados do usuário (Nome, Email, Senha).</param>
-    /// <returns>Retorna o token de acesso e dados do usuário criado.</returns>
-    /// <response code="201">Usuário criado com sucesso.</response>
-    /// <response code="400">Erro na requisição (ex: email já existe).</response>
+    /// <param name="dto">User data (Name, Email, Password).</param>
+    /// <returns>Returns the access token and created user data.</returns>
+    /// <response code="201">User created successfully.</response>
+    /// <response code="400">Request error (e.g., email already exists).</response>
     [HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,12 +39,12 @@ public class AuthController : ControllerBase
     }
 
     /// <summary>
-    /// Realiza o login do usuário.
+    /// Logs in the user.
     /// </summary>
-    /// <param name="dto">Credenciais (Email e Senha).</param>
-    /// <returns>Retorna o token JWT para autenticação.</returns>
-    /// <response code="200">Login realizado com sucesso.</response>
-    /// <response code="401">Credenciais inválidas.</response>
+    /// <param name="dto">Credentials (Email and Password).</param>
+    /// <returns>Returns the JWT token for authentication.</returns>
+    /// <response code="200">Login successful.</response>
+    /// <response code="401">Invalid credentials.</response>
     [HttpPost("login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -95,41 +95,116 @@ A API estará disponível em: `http://localhost:5001/swagger`
 3.  Clique em **Authorize** e depois em **Close**.
 
 ### 4. Criar Denúncia
-*   **Rota**: `POST /api/denuncias`
+*   **Rota**: `POST /api/reports`
 *   **Descrição**: Cria uma nova denúncia vinculada ao usuário logado.
 *   **Body (JSON)**:
     ```json
     {
-      "localizacao": "Rua das Flores, 123 - Centro",
-      "descricao": "Entulho acumulado na calçada atrapalhando a passagem."
+      "location": "Rua das Flores, 123 - Centro",
+      "description": "Entulho acumulado na calçada atrapalhando a passagem."
     }
     ```
 *   **Retorno Esperado (201 Created)**:
     ```json
     {
       "id": 1,
-      "localizacao": "Rua das Flores, 123 - Centro",
-      "descricao": "Entulho acumulado na calçada atrapalhando a passagem.",
+      "location": "Rua das Flores, 123 - Centro",
+      "description": "Entulho acumulado na calçada atrapalhando a passagem.",
       "status": "PENDENTE",
-      "dataCriacao": "2024-11-24T22:00:00Z",
-      "usuarioNome": "usuario_teste"
+      "createdAt": "2024-11-24T22:00:00Z",
+      "userName": "usuario_teste"
     }
     ```
 
 ### 5. Listar Minhas Denúncias
-*   **Rota**: `GET /api/denuncias/minhas`
+*   **Rota**: `GET /api/reports/my-reports`
 *   **Parâmetros (Opcionais)**: `page=1`, `pageSize=10`
 *   **Descrição**: Lista apenas as denúncias feitas por você.
 *   **Retorno Esperado (200 OK)**: Lista de denúncias (JSON Array).
 
 ### 6. Listar Todas (Apenas Admin)
-*   **Rota**: `GET /api/denuncias`
+*   **Rota**: `GET /api/reports`
 *   **Descrição**: Lista denúncias de *todos* os usuários. Requer usuário com `Role = "Admin"`.
 
 ### 7. Atualizar Status (Apenas Admin)
-*   **Rota**: `PUT /api/denuncias/{id}/status`
+*   **Rota**: `PUT /api/reports/{id}/status`
 *   **Body (JSON - String)**: `"RESOLVIDO"`
 *   **Descrição**: Atualiza o status de uma denúncia específica.
+
+## 📦 Outros Endpoints (Gestão de Resíduos)
+
+### 8. Pontos de Coleta
+*   **Rota**: `POST /api/collection-points`
+*   **Descrição**: Cadastra um novo ponto de coleta.
+*   **Body (JSON)**:
+    ```json
+    {
+      "location": "Av. Principal, 500",
+      "responsible": "Maria Silva"
+    }
+    ```
+
+### 9. Recicladores
+*   **Rota**: `POST /api/recyclers`
+*   **Descrição**: Cadastra um novo reciclador parceiro.
+*   **Body (JSON)**:
+    ```json
+    {
+      "name": "Recicla Mais",
+      "category": "Plástico/Papel"
+    }
+    ```
+
+### 10. Destinos Finais
+*   **Rota**: `POST /api/final-destinations`
+*   **Descrição**: Cadastra um local de destino final (ex: Aterro).
+*   **Body (JSON)**:
+    ```json
+    {
+      "description": "Aterro Sanitário Municipal"
+    }
+    ```
+
+### 11. Tipos de Resíduos
+*   **Rota**: `POST /api/wastes` (Criar)
+*   **Rota**: `GET /api/wastes` (Listar)
+*   **Descrição**: Gerencia os tipos de resíduos aceitos.
+*   **Body (Criar)**:
+    ```json
+    {
+      "type": "Eletrônico"
+    }
+    ```
+
+### 12. Coletas
+*   **Rota**: `POST /api/collections` (Agendar)
+*   **Rota**: `GET /api/collections` (Listar)
+*   **Rota**: `GET /api/collections/{id}` (Detalhes)
+*   **Rota**: `PUT /api/collections/{id}` (Atualizar)
+*   **Rota**: `DELETE /api/collections/{id}` (Remover)
+*   **Descrição**: Gerencia o agendamento e execução de coletas.
+*   **Body (Agendar)**:
+    ```json
+    {
+      "collectionPointId": 1,
+      "recyclerId": 1, // Opcional
+      "finalDestinationId": null, // Opcional
+      "collectionDate": "2024-12-01T10:00:00Z"
+    }
+    ```
+
+### 13. Associação Coleta-Resíduo
+*   **Rota**: `POST /api/collection-wastes` (Associar)
+*   **Rota**: `DELETE /api/collection-wastes/{collectionId}/{wasteId}` (Desassociar)
+*   **Descrição**: Vincula tipos de resíduos e pesos a uma coleta específica.
+*   **Body (Associar)**:
+    ```json
+    {
+      "collectionId": 1,
+      "wasteId": 2,
+      "weightKg": 50.5
+    }
+    ```
 
 ## 🏗️ Estrutura do Projeto
 *   **Controllers**: Endpoints da API.

@@ -44,7 +44,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseOracle(builder.Configuration.GetConnectionString("DatabaseConnection"), b => b.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19)));
 
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IDenunciaService, DenunciaService>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IManagementService, ManagementService>();
+builder.Services.AddScoped<ICollectionService, CollectionService>();
 
 var key = System.Text.Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!);
 builder.Services.AddAuthentication(x =>

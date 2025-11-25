@@ -121,3 +121,6 @@
 /Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/bin/Debug/net9.0/runtimes/linux/lib/net8.0/System.DirectoryServices.Protocols.dll
 /Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/bin/Debug/net9.0/runtimes/osx/lib/net8.0/System.DirectoryServices.Protocols.dll
 /Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/bin/Debug/net9.0/runtimes/win/lib/net8.0/System.DirectoryServices.Protocols.dll
+/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/bin/Debug/net9.0/WasteReporting.API.xml
+/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/obj/Debug/net9.0/WasteReporting.API.sourcelink.json
+/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/obj/Debug/net9.0/WasteReporting.API.xml
