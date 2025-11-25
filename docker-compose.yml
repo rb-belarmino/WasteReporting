@@ -1,0 +1,15 @@
+services:
+  api:
+    image: wastereporting-api
+    build:
+      context: .
+      dockerfile: WasteReporting.API/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DatabaseConnection=Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.fiap.com.br)(PORT=1521)))(CONNECT_DATA=(SID=orcl)));User Id=rm559881;Password=091081;Persist Security Info=True;Pooling=True;Connection Timeout=60;
+      - JwtSettings__SecretKey=super-secret-key-that-should-be-stored-in-env-vars-for-production
+      - JwtSettings__Issuer=WasteReportingAPI
+      - JwtSettings__Audience=WasteReportingUsers
+      - JwtSettings__ExpirationMinutes=60
