@@ -18,7 +18,19 @@ public class DenunciasController : ControllerBase
         _denunciaService = denunciaService;
     }
 
+    /// <summary>
+    /// Cria uma nova denúncia.
+    /// </summary>
+    /// <remarks>
+    /// Requer autenticação. A denúncia será vinculada ao usuário logado.
+    /// </remarks>
+    /// <param name="dto">Dados da denúncia (Localização e Descrição).</param>
+    /// <returns>Retorna a denúncia criada.</returns>
+    /// <response code="201">Denúncia criada com sucesso.</response>
+    /// <response code="401">Não autorizado.</response>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<DenunciaResponseDto>> CriarDenuncia(CreateDenunciaDto dto)
     {
         try
@@ -33,7 +45,15 @@ public class DenunciasController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Lista as denúncias do usuário logado.
+    /// </summary>
+    /// <param name="page">Número da página (padrão: 1).</param>
+    /// <param name="pageSize">Itens por página (padrão: 10).</param>
+    /// <returns>Lista de denúncias.</returns>
     [HttpGet("minhas")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<IEnumerable<DenunciaResponseDto>>> ListarMinhasDenuncias([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         try
@@ -48,8 +68,17 @@ public class DenunciasController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Lista todas as denúncias (Apenas Admin).
+    /// </summary>
+    /// <param name="page">Número da página (padrão: 1).</param>
+    /// <param name="pageSize">Itens por página (padrão: 10).</param>
+    /// <returns>Lista completa de denúncias.</returns>
     [HttpGet]
     [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<IEnumerable<DenunciaResponseDto>>> ListarTodas([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         try
@@ -63,8 +92,16 @@ public class DenunciasController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Atualiza o status de uma denúncia (Apenas Admin).
+    /// </summary>
+    /// <param name="id">ID da denúncia.</param>
+    /// <param name="status">Novo status (ex: "RESOLVIDO").</param>
+    /// <returns>A denúncia atualizada.</returns>
     [HttpPut("{id}/status")]
     [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<DenunciaResponseDto>> AtualizarStatus(int id, [FromBody] string status)
     {
         try
