@@ -54,7 +54,6 @@ public class CollectionsController : ControllerBase
     /// Updates a collection.
     /// </summary>
     [HttpPut("{id}")]
-    [HttpPut("{id}")]
     public async Task<ActionResult<CollectionResponseDto>> Update(int id, UpdateCollectionDto dto)
     {
         var result = await _service.UpdateCollectionAsync(id, dto);
@@ -64,7 +63,6 @@ public class CollectionsController : ControllerBase
     /// <summary>
     /// Deletes a collection.
     /// </summary>
-    [HttpDelete("{id}")]
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
