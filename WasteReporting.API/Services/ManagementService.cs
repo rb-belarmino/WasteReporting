@@ -46,9 +46,12 @@ public class ManagementService : IManagementService
         return new WasteDto { Id = waste.Id, Type = waste.Type };
     }
 
-    public async Task<IEnumerable<WasteDto>> ListWastesAsync()
+    public async Task<IEnumerable<WasteDto>> ListWastesAsync(int page, int pageSize)
     {
-        var wastes = await _context.Wastes.ToListAsync();
+        var wastes = await _context.Wastes
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
         return wastes.Select(r => new WasteDto { Id = r.Id, Type = r.Type });
     }
 }

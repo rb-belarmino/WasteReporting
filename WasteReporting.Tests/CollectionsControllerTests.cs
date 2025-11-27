@@ -58,10 +58,10 @@ public class CollectionsControllerTests
     {
         // Arrange
         var collections = new List<CollectionResponseDto> { new CollectionResponseDto { Id = 1 } };
-        _serviceMock.Setup(s => s.ListCollectionsAsync()).ReturnsAsync(collections);
+        _serviceMock.Setup(s => s.ListCollectionsAsync(1, 10)).ReturnsAsync(collections);
 
         // Act
-        var result = await _controller.ListAll();
+        var result = await _controller.ListAll(1, 10);
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);

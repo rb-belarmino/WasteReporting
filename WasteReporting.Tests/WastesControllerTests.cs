@@ -41,10 +41,10 @@ public class WastesControllerTests
     {
         // Arrange
         var wastes = new List<WasteDto> { new WasteDto { Id = 1, Type = "Type" } };
-        _serviceMock.Setup(s => s.ListWastesAsync()).ReturnsAsync(wastes);
+        _serviceMock.Setup(s => s.ListWastesAsync(1, 10)).ReturnsAsync(wastes);
 
         // Act
-        var result = await _controller.ListAll();
+        var result = await _controller.ListAll(1, 10);
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);

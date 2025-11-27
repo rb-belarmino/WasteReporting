@@ -2921,11 +2921,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/WasteReporting.Tests.csproj",
+      "projectUniqueName": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.Tests/WasteReporting.Tests.csproj",
       "projectName": "WasteReporting.Tests",
-      "projectPath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/WasteReporting.Tests.csproj",
+      "projectPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.Tests/WasteReporting.Tests.csproj",
       "packagesPath": "/Users/rodrigobelarmino/.nuget/packages/",
-      "outputPath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/obj/",
+      "outputPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/rodrigobelarmino/.nuget/NuGet/NuGet.Config"
@@ -2940,8 +2940,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/WasteReporting.API.csproj": {
-              "projectPath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/WasteReporting.API.csproj"
+            "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj": {
+              "projectPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj"
             }
           }
         }

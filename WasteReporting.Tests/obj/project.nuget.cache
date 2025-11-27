@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wigZT5QFQLI=",
+  "dgSpecHash": "0MiHMnia7tY=",
   "success": true,
-  "projectFilePath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.Tests/WasteReporting.Tests.csproj",
+  "projectFilePath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.Tests/WasteReporting.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/rodrigobelarmino/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/rodrigobelarmino/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",

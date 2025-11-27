@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WasteReporting.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e88f909baa128e886214b908245f4bc6e22ec60d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce02917b23cfaf1ea2c8e579a1954a88af224273")]
 [assembly: System.Reflection.AssemblyProductAttribute("WasteReporting.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WasteReporting.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

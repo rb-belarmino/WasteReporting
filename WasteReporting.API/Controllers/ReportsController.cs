@@ -26,16 +26,9 @@ public class ReportsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ReportResponseDto>> CreateReport([FromBody] CreateReportDto dto)
     {
-        try
-        {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-            var result = await _service.CreateReportAsync(dto, userId);
-            return CreatedAtAction(nameof(ListMyReports), new { id = result.Id }, result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        var result = await _service.CreateReportAsync(dto, userId);
+        return CreatedAtAction(nameof(ListMyReports), new { id = result.Id }, result);
     }
 
     /// <summary>
@@ -60,15 +53,8 @@ public class ReportsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<IEnumerable<ReportResponseDto>>> ListAllReports([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        try
-        {
-            var result = await _service.ListAllReportsAsync(page, pageSize);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
+        var result = await _service.ListAllReportsAsync(page, pageSize);
+        return Ok(result);
     }
 
     /// <summary>
@@ -83,14 +69,7 @@ public class ReportsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ReportResponseDto>> UpdateStatus(int id, [FromBody] string status)
     {
-        try
-        {
-            var result = await _service.UpdateStatusAsync(id, status);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
+        var result = await _service.UpdateStatusAsync(id, status);
+        return Ok(result);
     }
 }

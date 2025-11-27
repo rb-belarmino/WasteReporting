@@ -168,6 +168,7 @@ A API estará disponível em: `http://localhost:5001/swagger`
 ### 11. Tipos de Resíduos
 *   **Rota**: `POST /api/wastes` (Criar)
 *   **Rota**: `GET /api/wastes` (Listar)
+*   **Parâmetros (Opcionais)**: `page=1`, `pageSize=10`
 *   **Descrição**: Gerencia os tipos de resíduos aceitos.
 *   **Body (Criar)**:
     ```json
@@ -179,6 +180,7 @@ A API estará disponível em: `http://localhost:5001/swagger`
 ### 12. Coletas
 *   **Rota**: `POST /api/collections` (Agendar)
 *   **Rota**: `GET /api/collections` (Listar)
+*   **Parâmetros (Opcionais)**: `page=1`, `pageSize=10`
 *   **Rota**: `GET /api/collections/{id}` (Detalhes)
 *   **Rota**: `PUT /api/collections/{id}` (Atualizar)
 *   **Rota**: `DELETE /api/collections/{id}` (Remover)

@@ -44,12 +44,14 @@ public class CollectionService : ICollectionService
         return MapToDto(collection);
     }
 
-    public async Task<IEnumerable<CollectionResponseDto>> ListCollectionsAsync()
+    public async Task<IEnumerable<CollectionResponseDto>> ListCollectionsAsync(int page, int pageSize)
     {
         var collections = await _context.Collections
             .Include(c => c.CollectionPoint)
             .Include(c => c.Recycler)
             .Include(c => c.FinalDestination)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
 
         return collections.Select(MapToDto);

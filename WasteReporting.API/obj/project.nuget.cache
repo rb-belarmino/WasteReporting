@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V0XSQ+BTgL8=",
+  "dgSpecHash": "oKQprM0Vh1A=",
   "success": true,
-  "projectFilePath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/WasteReporting.API.csproj",
+  "projectFilePath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
   "expectedPackageFiles": [
     "/Users/rodrigobelarmino/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/rodrigobelarmino/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",

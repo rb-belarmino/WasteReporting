@@ -3294,11 +3294,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/WasteReporting.API.csproj",
+      "projectUniqueName": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
       "projectName": "WasteReporting.API",
-      "projectPath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/WasteReporting.API.csproj",
+      "projectPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
       "packagesPath": "/Users/rodrigobelarmino/.nuget/packages/",
-      "outputPath": "/Users/rodrigobelarmino/Desktop/API_ASP.NET/WasteReporting.API/obj/",
+      "outputPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/rodrigobelarmino/.nuget/NuGet/NuGet.Config"

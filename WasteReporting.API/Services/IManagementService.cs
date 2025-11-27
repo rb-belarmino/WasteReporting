@@ -9,5 +9,5 @@ public interface IManagementService
     Task<FinalDestinationDto> CreateFinalDestinationAsync(CreateFinalDestinationDto dto);
     Task<WasteDto> CreateWasteAsync(CreateWasteDto dto);
 
-    Task<IEnumerable<WasteDto>> ListWastesAsync();
+    Task<IEnumerable<WasteDto>> ListWastesAsync(int page, int pageSize);
 }

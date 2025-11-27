@@ -33,24 +33,20 @@ public class CollectionsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<CollectionResponseDto>> GetById(int id)
     {
-        try
-        {
-            var result = await _service.GetCollectionByIdAsync(id);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(new { message = ex.Message });
-        }
+        var result = await _service.GetCollectionByIdAsync(id);
+        return Ok(result);
     }
 
     /// <summary>
     /// Lists all collections.
     /// </summary>
+    /// <summary>
+    /// Lists all collections.
+    /// </summary>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CollectionResponseDto>>> ListAll()
+    public async Task<ActionResult<IEnumerable<CollectionResponseDto>>> ListAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await _service.ListCollectionsAsync();
+        var result = await _service.ListCollectionsAsync(page, pageSize);
         return Ok(result);
     }
 
@@ -58,33 +54,21 @@ public class CollectionsController : ControllerBase
     /// Updates a collection.
     /// </summary>
     [HttpPut("{id}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult<CollectionResponseDto>> Update(int id, UpdateCollectionDto dto)
     {
-        try
-        {
-            var result = await _service.UpdateCollectionAsync(id, dto);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(new { message = ex.Message });
-        }
+        var result = await _service.UpdateCollectionAsync(id, dto);
+        return Ok(result);
     }
 
     /// <summary>
     /// Deletes a collection.
     /// </summary>
     [HttpDelete("{id}")]
+    [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        try
-        {
-            await _service.DeleteCollectionAsync(id);
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            return NotFound(new { message = ex.Message });
-        }
+        await _service.DeleteCollectionAsync(id);
+        return NoContent();
     }
 }

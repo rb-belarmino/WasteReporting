@@ -80,6 +80,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<WasteReporting.API.Middleware.ExceptionHandlingMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

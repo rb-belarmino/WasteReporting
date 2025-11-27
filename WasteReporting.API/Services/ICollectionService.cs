@@ -6,7 +6,7 @@ public interface ICollectionService
 {
     Task<CollectionResponseDto> ScheduleCollectionAsync(CreateCollectionDto dto);
     Task<CollectionResponseDto> GetCollectionByIdAsync(int id);
-    Task<IEnumerable<CollectionResponseDto>> ListCollectionsAsync();
+    Task<IEnumerable<CollectionResponseDto>> ListCollectionsAsync(int page, int pageSize);
     Task<CollectionResponseDto> UpdateCollectionAsync(int id, UpdateCollectionDto dto);
     Task DeleteCollectionAsync(int id);
 

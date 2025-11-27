@@ -31,9 +31,9 @@ public class WastesController : ControllerBase
     /// Lists all registered waste types.
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<WasteDto>>> ListAll()
+    public async Task<ActionResult<IEnumerable<WasteDto>>> ListAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await _service.ListWastesAsync();
+        var result = await _service.ListWastesAsync(page, pageSize);
         return Ok(result);
     }
 }
