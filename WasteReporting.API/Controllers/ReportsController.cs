@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 
 namespace WasteReporting.API.Controllers;
@@ -24,7 +24,7 @@ public class ReportsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ReportResponseDto>> CreateReport([FromBody] CreateReportDto dto)
+    public async Task<ActionResult<ReportResponseViewModel>> CreateReport([FromBody] CreateReportViewModel dto)
     {
         var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
         var result = await _service.CreateReportAsync(dto, userId);
@@ -36,7 +36,7 @@ public class ReportsController : ControllerBase
     /// </summary>
     [HttpGet("my-reports")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<ReportResponseDto>>> ListMyReports([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    public async Task<ActionResult<IEnumerable<ReportResponseViewModel>>> ListMyReports([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
         var result = await _service.ListMyReportsAsync(userId, page, pageSize);
@@ -51,7 +51,7 @@ public class ReportsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult<IEnumerable<ReportResponseDto>>> ListAllReports([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    public async Task<ActionResult<IEnumerable<ReportResponseViewModel>>> ListAllReports([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var result = await _service.ListAllReportsAsync(page, pageSize);
         return Ok(result);
@@ -67,7 +67,7 @@ public class ReportsController : ControllerBase
     [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ReportResponseDto>> UpdateStatus(int id, [FromBody] string status)
+    public async Task<ActionResult<ReportResponseViewModel>> UpdateStatus(int id, [FromBody] string status)
     {
         var result = await _service.UpdateStatusAsync(id, status);
         return Ok(result);

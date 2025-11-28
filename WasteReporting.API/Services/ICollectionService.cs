@@ -1,16 +1,16 @@
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 
 namespace WasteReporting.API.Services;
 
 public interface ICollectionService
 {
-    Task<CollectionResponseDto> ScheduleCollectionAsync(CreateCollectionDto dto);
-    Task<CollectionResponseDto> GetCollectionByIdAsync(int id);
-    Task<IEnumerable<CollectionResponseDto>> ListCollectionsAsync(int page, int pageSize);
-    Task<CollectionResponseDto> UpdateCollectionAsync(int id, UpdateCollectionDto dto);
+    Task<CollectionResponseViewModel> ScheduleCollectionAsync(CreateCollectionViewModel dto);
+    Task<CollectionResponseViewModel> GetCollectionByIdAsync(int id);
+    Task<IEnumerable<CollectionResponseViewModel>> ListCollectionsAsync(int page, int pageSize);
+    Task<CollectionResponseViewModel> UpdateCollectionAsync(int id, UpdateCollectionViewModel dto);
     Task DeleteCollectionAsync(int id);
 
-    Task AssociateWasteAsync(CreateCollectionWasteDto dto);
+    Task AssociateWasteAsync(CreateCollectionWasteViewModel dto);
     Task DisassociateWasteAsync(int collectionId, int wasteId);
-    Task<IEnumerable<CollectionWasteResponseDto>> ListAssociationsAsync();
+    Task<IEnumerable<CollectionWasteResponseViewModel>> ListAssociationsAsync();
 }

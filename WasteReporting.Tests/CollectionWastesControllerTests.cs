@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -22,7 +22,7 @@ public class CollectionWastesControllerTests
     public async Task Associate_ShouldReturnOk()
     {
         // Arrange
-        var dto = new CreateCollectionWasteDto { CollectionId = 1, WasteId = 1, WeightKg = 10 };
+        var dto = new CreateCollectionWasteViewModel { CollectionId = 1, WasteId = 1, WeightKg = 10 };
         _serviceMock.Setup(s => s.AssociateWasteAsync(dto)).Returns(Task.CompletedTask);
 
         // Act
@@ -49,7 +49,7 @@ public class CollectionWastesControllerTests
     public async Task ListAll_ShouldReturnOk()
     {
         // Arrange
-        var list = new List<CollectionWasteResponseDto> { new CollectionWasteResponseDto { CollectionId = 1, WasteId = 1 } };
+        var list = new List<CollectionWasteResponseViewModel> { new CollectionWasteResponseViewModel { CollectionId = 1, WasteId = 1 } };
         _serviceMock.Setup(s => s.ListAssociationsAsync()).ReturnsAsync(list);
 
         // Act
@@ -57,7 +57,7 @@ public class CollectionWastesControllerTests
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnedList = Assert.IsAssignableFrom<IEnumerable<CollectionWasteResponseDto>>(actionResult.Value);
+        var returnedList = Assert.IsAssignableFrom<IEnumerable<CollectionWasteResponseViewModel>>(actionResult.Value);
         Assert.Single(returnedList);
     }
 }

@@ -211,6 +211,6 @@ A API estará disponível em: `http://localhost:5001/swagger`
 ## 🏗️ Estrutura do Projeto
 *   **Controllers**: Endpoints da API.
 *   **Services**: Regras de negócio.
-*   **DTOs**: Objetos de transferência de dados (ViewModel).
+*   **ViewModels**: Modelos de visualização para transferência de dados (MVVM).
 *   **Models**: Entidades do banco de dados.
 *   **Data**: Contexto do Entity Framework.

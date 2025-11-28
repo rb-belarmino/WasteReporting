@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 
 namespace WasteReporting.API.Controllers;
@@ -21,7 +21,7 @@ public class RecyclersController : ControllerBase
     /// Creates a new Recycler.
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult<RecyclerDto>> Create(CreateRecyclerDto dto)
+    public async Task<ActionResult<RecyclerViewModel>> Create(CreateRecyclerViewModel dto)
     {
         var result = await _service.CreateRecyclerAsync(dto);
         return CreatedAtAction(nameof(Create), new { id = result.Id }, result);

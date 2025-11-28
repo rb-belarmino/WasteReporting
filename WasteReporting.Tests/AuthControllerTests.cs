@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -22,17 +22,17 @@ public class AuthControllerTests
     public async Task Register_ReturnsCreated_WhenSuccess()
     {
         // Arrange
-        var registerDto = new RegisterDto { Username = "test", Email = "test@test.com", Password = "123" };
-        var responseDto = new AuthResponseDto { Token = "token", Username = "test" };
+        var registerViewModel = new RegisterViewModel { Username = "test", Email = "test@test.com", Password = "123" };
+        var responseViewModel = new AuthResponseViewModel { Token = "token", Username = "test" };
 
-        _mockAuthService.Setup(s => s.RegisterAsync(registerDto)).ReturnsAsync(responseDto);
+        _mockAuthService.Setup(s => s.RegisterAsync(registerViewModel)).ReturnsAsync(responseViewModel);
 
         // Act
-        var result = await _controller.Register(registerDto);
+        var result = await _controller.Register(registerViewModel);
 
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnValue = Assert.IsType<AuthResponseDto>(actionResult.Value);
+        var returnValue = Assert.IsType<AuthResponseViewModel>(actionResult.Value);
         Assert.Equal("test", returnValue.Username);
     }
 
@@ -40,17 +40,17 @@ public class AuthControllerTests
     public async Task Login_ReturnsOk_WhenSuccess()
     {
         // Arrange
-        var loginDto = new LoginDto { Email = "test@test.com", Password = "123" };
-        var responseDto = new AuthResponseDto { Token = "token", Username = "test" };
+        var loginViewModel = new LoginViewModel { Email = "test@test.com", Password = "123" };
+        var responseViewModel = new AuthResponseViewModel { Token = "token", Username = "test" };
 
-        _mockAuthService.Setup(s => s.LoginAsync(loginDto)).ReturnsAsync(responseDto);
+        _mockAuthService.Setup(s => s.LoginAsync(loginViewModel)).ReturnsAsync(responseViewModel);
 
         // Act
-        var result = await _controller.Login(loginDto);
+        var result = await _controller.Login(loginViewModel);
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnValue = Assert.IsType<AuthResponseDto>(actionResult.Value);
+        var returnValue = Assert.IsType<AuthResponseViewModel>(actionResult.Value);
         Assert.Equal("token", returnValue.Token);
     }
 }

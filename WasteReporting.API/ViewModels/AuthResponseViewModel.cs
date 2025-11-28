@@ -1,6 +1,6 @@
-namespace WasteReporting.API.DTOs;
+namespace WasteReporting.API.ViewModels;
 
-public class AuthResponseDto
+public class AuthResponseViewModel
 {
     public string Token { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;

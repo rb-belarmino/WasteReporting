@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -23,8 +23,8 @@ public class FinalDestinationsControllerTests
     public async Task Create_ShouldReturnCreated()
     {
         // Arrange
-        var dto = new CreateFinalDestinationDto { Description = "Desc" };
-        var response = new FinalDestinationDto { Id = 1, Description = "Desc" };
+        var dto = new CreateFinalDestinationViewModel { Description = "Desc" };
+        var response = new FinalDestinationViewModel { Id = 1, Description = "Desc" };
 
         _serviceMock.Setup(s => s.CreateFinalDestinationAsync(dto)).ReturnsAsync(response);
 
@@ -33,7 +33,7 @@ public class FinalDestinationsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnedDto = Assert.IsType<FinalDestinationDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
+        var returnedViewModel = Assert.IsType<FinalDestinationViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
     }
 }

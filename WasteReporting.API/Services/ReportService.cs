@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WasteReporting.API.Data;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Models;
 
 namespace WasteReporting.API.Services;
@@ -14,7 +14,7 @@ public class ReportService : IReportService
         _context = context;
     }
 
-    public async Task<ReportResponseDto> CreateReportAsync(CreateReportDto dto, int userId)
+    public async Task<ReportResponseViewModel> CreateReportAsync(CreateReportViewModel dto, int userId)
     {
         var report = new Report
         {
@@ -31,10 +31,10 @@ public class ReportService : IReportService
         // Load user to return username
         await _context.Entry(report).Reference(d => d.User).LoadAsync();
 
-        return MapToDto(report);
+        return MapToViewModel(report);
     }
 
-    public async Task<IEnumerable<ReportResponseDto>> ListMyReportsAsync(int userId, int page, int pageSize)
+    public async Task<IEnumerable<ReportResponseViewModel>> ListMyReportsAsync(int userId, int page, int pageSize)
     {
         var reports = await _context.Reports
             .Include(d => d.User)
@@ -43,10 +43,10 @@ public class ReportService : IReportService
             .Take(pageSize)
             .ToListAsync();
 
-        return reports.Select(MapToDto);
+        return reports.Select(MapToViewModel);
     }
 
-    public async Task<IEnumerable<ReportResponseDto>> ListAllReportsAsync(int page, int pageSize)
+    public async Task<IEnumerable<ReportResponseViewModel>> ListAllReportsAsync(int page, int pageSize)
     {
         var reports = await _context.Reports
             .Include(d => d.User)
@@ -54,10 +54,10 @@ public class ReportService : IReportService
             .Take(pageSize)
             .ToListAsync();
 
-        return reports.Select(MapToDto);
+        return reports.Select(MapToViewModel);
     }
 
-    public async Task<ReportResponseDto> UpdateStatusAsync(int id, string newStatus)
+    public async Task<ReportResponseViewModel> UpdateStatusAsync(int id, string newStatus)
     {
         var report = await _context.Reports.Include(d => d.User).FirstOrDefaultAsync(d => d.Id == id);
 
@@ -69,12 +69,12 @@ public class ReportService : IReportService
         report.Status = newStatus;
         await _context.SaveChangesAsync();
 
-        return MapToDto(report);
+        return MapToViewModel(report);
     }
 
-    private static ReportResponseDto MapToDto(Report report)
+    private static ReportResponseViewModel MapToViewModel(Report report)
     {
-        return new ReportResponseDto
+        return new ReportResponseViewModel
         {
             Id = report.Id,
             Location = report.Location,

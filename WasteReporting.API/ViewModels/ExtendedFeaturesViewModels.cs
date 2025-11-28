@@ -1,34 +1,34 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WasteReporting.API.DTOs;
+namespace WasteReporting.API.ViewModels;
 
-public class CreateCollectionPointDto
+public class CreateCollectionPointViewModel
 {
     [Required]
     public string Location { get; set; } = string.Empty;
     public string Responsible { get; set; } = string.Empty;
 }
 
-public class CreateRecyclerDto
+public class CreateRecyclerViewModel
 {
     [Required]
     public string Name { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
 }
 
-public class CreateFinalDestinationDto
+public class CreateFinalDestinationViewModel
 {
     [Required]
     public string Description { get; set; } = string.Empty;
 }
 
-public class CreateWasteDto
+public class CreateWasteViewModel
 {
     [Required]
     public string Type { get; set; } = string.Empty;
 }
 
-public class CreateCollectionDto
+public class CreateCollectionViewModel
 {
     public int CollectionPointId { get; set; }
     public DateTime CollectionDate { get; set; }
@@ -37,7 +37,7 @@ public class CreateCollectionDto
     public string Status { get; set; } = "AGENDADA";
 }
 
-public class UpdateCollectionDto
+public class UpdateCollectionViewModel
 {
     public int CollectionPointId { get; set; }
     public DateTime CollectionDate { get; set; }
@@ -46,29 +46,29 @@ public class UpdateCollectionDto
     public string Status { get; set; } = "AGENDADA";
 }
 
-public class CreateCollectionWasteDto
+public class CreateCollectionWasteViewModel
 {
     public int CollectionId { get; set; }
     public int WasteId { get; set; }
     public double WeightKg { get; set; }
 }
 
-public class CollectionResponseDto
+public class CollectionResponseViewModel
 {
     public int Id { get; set; }
-    public CollectionPointDto? CollectionPoint { get; set; }
+    public CollectionPointViewModel? CollectionPoint { get; set; }
     public DateTime CollectionDate { get; set; }
-    public RecyclerDto? Recycler { get; set; }
-    public FinalDestinationDto? FinalDestination { get; set; }
+    public RecyclerViewModel? Recycler { get; set; }
+    public FinalDestinationViewModel? FinalDestination { get; set; }
     public string Status { get; set; } = string.Empty;
 }
 
-public class CollectionPointDto { public int Id { get; set; } public string Location { get; set; } = string.Empty; }
-public class RecyclerDto { public int Id { get; set; } public string Name { get; set; } = string.Empty; }
-public class FinalDestinationDto { public int Id { get; set; } public string Description { get; set; } = string.Empty; }
-public class WasteDto { public int Id { get; set; } public string Type { get; set; } = string.Empty; }
+public class CollectionPointViewModel { public int Id { get; set; } public string Location { get; set; } = string.Empty; }
+public class RecyclerViewModel { public int Id { get; set; } public string Name { get; set; } = string.Empty; }
+public class FinalDestinationViewModel { public int Id { get; set; } public string Description { get; set; } = string.Empty; }
+public class WasteViewModel { public int Id { get; set; } public string Type { get; set; } = string.Empty; }
 
-public class CollectionWasteResponseDto
+public class CollectionWasteResponseViewModel
 {
     public int CollectionId { get; set; }
     public int WasteId { get; set; }

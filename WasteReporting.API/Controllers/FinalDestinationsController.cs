@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 
 namespace WasteReporting.API.Controllers;
@@ -21,7 +21,7 @@ public class FinalDestinationsController : ControllerBase
     /// Creates a new Final Destination.
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult<FinalDestinationDto>> Create(CreateFinalDestinationDto dto)
+    public async Task<ActionResult<FinalDestinationViewModel>> Create(CreateFinalDestinationViewModel dto)
     {
         var result = await _service.CreateFinalDestinationAsync(dto);
         return CreatedAtAction(nameof(Create), new { id = result.Id }, result);

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WasteReporting.API.Data;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Models;
 
 namespace WasteReporting.API.Services;
@@ -14,7 +14,7 @@ public class CollectionService : ICollectionService
         _context = context;
     }
 
-    public async Task<CollectionResponseDto> ScheduleCollectionAsync(CreateCollectionDto dto)
+    public async Task<CollectionResponseViewModel> ScheduleCollectionAsync(CreateCollectionViewModel dto)
     {
         var collection = new Collection
         {
@@ -31,7 +31,7 @@ public class CollectionService : ICollectionService
         return await GetCollectionByIdAsync(collection.Id);
     }
 
-    public async Task<CollectionResponseDto> GetCollectionByIdAsync(int id)
+    public async Task<CollectionResponseViewModel> GetCollectionByIdAsync(int id)
     {
         var collection = await _context.Collections
             .Include(c => c.CollectionPoint)
@@ -41,10 +41,10 @@ public class CollectionService : ICollectionService
 
         if (collection == null) throw new Exception("Collection not found");
 
-        return MapToDto(collection);
+        return MapToViewModel(collection);
     }
 
-    public async Task<IEnumerable<CollectionResponseDto>> ListCollectionsAsync(int page, int pageSize)
+    public async Task<IEnumerable<CollectionResponseViewModel>> ListCollectionsAsync(int page, int pageSize)
     {
         var collections = await _context.Collections
             .Include(c => c.CollectionPoint)
@@ -54,10 +54,10 @@ public class CollectionService : ICollectionService
             .Take(pageSize)
             .ToListAsync();
 
-        return collections.Select(MapToDto);
+        return collections.Select(MapToViewModel);
     }
 
-    public async Task<CollectionResponseDto> UpdateCollectionAsync(int id, UpdateCollectionDto dto)
+    public async Task<CollectionResponseViewModel> UpdateCollectionAsync(int id, UpdateCollectionViewModel dto)
     {
         var collection = await _context.Collections.FindAsync(id);
         if (collection == null) throw new Exception("Collection not found");
@@ -81,7 +81,7 @@ public class CollectionService : ICollectionService
         await _context.SaveChangesAsync();
     }
 
-    public async Task AssociateWasteAsync(CreateCollectionWasteDto dto)
+    public async Task AssociateWasteAsync(CreateCollectionWasteViewModel dto)
     {
         var association = new CollectionWaste
         {
@@ -103,10 +103,10 @@ public class CollectionService : ICollectionService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<CollectionWasteResponseDto>> ListAssociationsAsync()
+    public async Task<IEnumerable<CollectionWasteResponseViewModel>> ListAssociationsAsync()
     {
         var associations = await _context.CollectionWastes.ToListAsync();
-        return associations.Select(a => new CollectionWasteResponseDto
+        return associations.Select(a => new CollectionWasteResponseViewModel
         {
             CollectionId = a.CollectionId,
             WasteId = a.WasteId,
@@ -114,14 +114,14 @@ public class CollectionService : ICollectionService
         });
     }
 
-    private static CollectionResponseDto MapToDto(Collection c)
+    private static CollectionResponseViewModel MapToViewModel(Collection c)
     {
-        return new CollectionResponseDto
+        return new CollectionResponseViewModel
         {
             Id = c.Id,
-            CollectionPoint = c.CollectionPoint != null ? new CollectionPointDto { Id = c.CollectionPoint.Id, Location = c.CollectionPoint.Location } : null,
-            Recycler = c.Recycler != null ? new RecyclerDto { Id = c.Recycler.Id, Name = c.Recycler.Name } : null,
-            FinalDestination = c.FinalDestination != null ? new FinalDestinationDto { Id = c.FinalDestination.Id, Description = c.FinalDestination.Description } : null,
+            CollectionPoint = c.CollectionPoint != null ? new CollectionPointViewModel { Id = c.CollectionPoint.Id, Location = c.CollectionPoint.Location } : null,
+            Recycler = c.Recycler != null ? new RecyclerViewModel { Id = c.Recycler.Id, Name = c.Recycler.Name } : null,
+            FinalDestination = c.FinalDestination != null ? new FinalDestinationViewModel { Id = c.FinalDestination.Id, Description = c.FinalDestination.Description } : null,
             CollectionDate = c.CollectionDate,
             Status = c.Status
         };

@@ -5,7 +5,7 @@ using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WasteReporting.API.Data;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Models;
 
 namespace WasteReporting.API.Services;
@@ -21,7 +21,7 @@ public class AuthService : IAuthService
         _configuration = configuration;
     }
 
-    public async Task<AuthResponseDto> RegisterAsync(RegisterDto dto)
+    public async Task<AuthResponseViewModel> RegisterAsync(RegisterViewModel dto)
     {
         if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
         {
@@ -42,7 +42,7 @@ public class AuthService : IAuthService
         return GenerateAuthResponse(user);
     }
 
-    public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
+    public async Task<AuthResponseViewModel> LoginAsync(LoginViewModel dto)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
 
@@ -54,7 +54,7 @@ public class AuthService : IAuthService
         return GenerateAuthResponse(user);
     }
 
-    private AuthResponseDto GenerateAuthResponse(User user)
+    private AuthResponseViewModel GenerateAuthResponse(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:SecretKey"]!);
@@ -75,7 +75,7 @@ public class AuthService : IAuthService
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
-        return new AuthResponseDto
+        return new AuthResponseViewModel
         {
             Token = tokenHandler.WriteToken(token),
             Username = user.Username,

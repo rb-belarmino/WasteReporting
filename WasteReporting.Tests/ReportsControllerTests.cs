@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -35,8 +35,8 @@ public class ReportsControllerTests
     public async Task CreateReport_ShouldReturnCreated()
     {
         // Arrange
-        var dto = new CreateReportDto { Location = "Loc", Description = "Desc" };
-        var response = new ReportResponseDto { Id = 1, Location = "Loc", Description = "Desc" };
+        var dto = new CreateReportViewModel { Location = "Loc", Description = "Desc" };
+        var response = new ReportResponseViewModel { Id = 1, Location = "Loc", Description = "Desc" };
 
         _serviceMock.Setup(s => s.CreateReportAsync(dto, 1)).ReturnsAsync(response);
 
@@ -45,15 +45,15 @@ public class ReportsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnedDto = Assert.IsType<ReportResponseDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
+        var returnedViewModel = Assert.IsType<ReportResponseViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
     }
 
     [Fact]
     public async Task ListMyReports_ShouldReturnOk()
     {
         // Arrange
-        var reports = new List<ReportResponseDto> { new ReportResponseDto { Id = 1 } };
+        var reports = new List<ReportResponseViewModel> { new ReportResponseViewModel { Id = 1 } };
         _serviceMock.Setup(s => s.ListMyReportsAsync(1, 1, 10)).ReturnsAsync(reports);
 
         // Act
@@ -61,7 +61,7 @@ public class ReportsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnedList = Assert.IsAssignableFrom<IEnumerable<ReportResponseDto>>(actionResult.Value);
+        var returnedList = Assert.IsAssignableFrom<IEnumerable<ReportResponseViewModel>>(actionResult.Value);
         Assert.Single(returnedList);
     }
 }

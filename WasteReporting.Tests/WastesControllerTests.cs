@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -22,8 +22,8 @@ public class WastesControllerTests
     public async Task Create_ShouldReturnCreated()
     {
         // Arrange
-        var dto = new CreateWasteDto { Type = "Type" };
-        var response = new WasteDto { Id = 1, Type = "Type" };
+        var dto = new CreateWasteViewModel { Type = "Type" };
+        var response = new WasteViewModel { Id = 1, Type = "Type" };
 
         _serviceMock.Setup(s => s.CreateWasteAsync(dto)).ReturnsAsync(response);
 
@@ -32,15 +32,15 @@ public class WastesControllerTests
 
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnedDto = Assert.IsType<WasteDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
+        var returnedViewModel = Assert.IsType<WasteViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
     }
 
     [Fact]
     public async Task ListAll_ShouldReturnOk()
     {
         // Arrange
-        var wastes = new List<WasteDto> { new WasteDto { Id = 1, Type = "Type" } };
+        var wastes = new List<WasteViewModel> { new WasteViewModel { Id = 1, Type = "Type" } };
         _serviceMock.Setup(s => s.ListWastesAsync(1, 10)).ReturnsAsync(wastes);
 
         // Act
@@ -48,7 +48,7 @@ public class WastesControllerTests
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnedList = Assert.IsAssignableFrom<IEnumerable<WasteDto>>(actionResult.Value);
+        var returnedList = Assert.IsAssignableFrom<IEnumerable<WasteViewModel>>(actionResult.Value);
         Assert.Single(returnedList);
     }
 }

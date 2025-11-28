@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -22,8 +22,8 @@ public class RecyclersControllerTests
     public async Task Create_ShouldReturnCreated()
     {
         // Arrange
-        var dto = new CreateRecyclerDto { Name = "Name", Category = "Cat" };
-        var response = new RecyclerDto { Id = 1, Name = "Name" };
+        var dto = new CreateRecyclerViewModel { Name = "Name", Category = "Cat" };
+        var response = new RecyclerViewModel { Id = 1, Name = "Name" };
 
         _serviceMock.Setup(s => s.CreateRecyclerAsync(dto)).ReturnsAsync(response);
 
@@ -32,8 +32,8 @@ public class RecyclersControllerTests
 
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnedDto = Assert.IsType<RecyclerDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
-        Assert.Equal("Name", returnedDto.Name);
+        var returnedViewModel = Assert.IsType<RecyclerViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
+        Assert.Equal("Name", returnedViewModel.Name);
     }
 }

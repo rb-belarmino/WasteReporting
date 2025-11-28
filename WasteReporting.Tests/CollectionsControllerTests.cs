@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WasteReporting.API.Controllers;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 using Xunit;
 
@@ -23,8 +23,8 @@ public class CollectionsControllerTests
     public async Task Schedule_ShouldReturnCreated()
     {
         // Arrange
-        var dto = new CreateCollectionDto { CollectionPointId = 1 };
-        var response = new CollectionResponseDto { Id = 1 };
+        var dto = new CreateCollectionViewModel { CollectionPointId = 1 };
+        var response = new CollectionResponseViewModel { Id = 1 };
 
         _serviceMock.Setup(s => s.ScheduleCollectionAsync(dto)).ReturnsAsync(response);
 
@@ -33,15 +33,15 @@ public class CollectionsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var returnedDto = Assert.IsType<CollectionResponseDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
+        var returnedViewModel = Assert.IsType<CollectionResponseViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
     }
 
     [Fact]
     public async Task GetById_ShouldReturnOk()
     {
         // Arrange
-        var response = new CollectionResponseDto { Id = 1 };
+        var response = new CollectionResponseViewModel { Id = 1 };
         _serviceMock.Setup(s => s.GetCollectionByIdAsync(1)).ReturnsAsync(response);
 
         // Act
@@ -49,15 +49,15 @@ public class CollectionsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnedDto = Assert.IsType<CollectionResponseDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
+        var returnedViewModel = Assert.IsType<CollectionResponseViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
     }
 
     [Fact]
     public async Task ListAll_ShouldReturnOk()
     {
         // Arrange
-        var collections = new List<CollectionResponseDto> { new CollectionResponseDto { Id = 1 } };
+        var collections = new List<CollectionResponseViewModel> { new CollectionResponseViewModel { Id = 1 } };
         _serviceMock.Setup(s => s.ListCollectionsAsync(1, 10)).ReturnsAsync(collections);
 
         // Act
@@ -65,7 +65,7 @@ public class CollectionsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnedList = Assert.IsAssignableFrom<IEnumerable<CollectionResponseDto>>(actionResult.Value);
+        var returnedList = Assert.IsAssignableFrom<IEnumerable<CollectionResponseViewModel>>(actionResult.Value);
         Assert.Single(returnedList);
     }
 
@@ -73,8 +73,8 @@ public class CollectionsControllerTests
     public async Task Update_ShouldReturnOk()
     {
         // Arrange
-        var dto = new UpdateCollectionDto { CollectionPointId = 2 };
-        var response = new CollectionResponseDto { Id = 1 };
+        var dto = new UpdateCollectionViewModel { CollectionPointId = 2 };
+        var response = new CollectionResponseViewModel { Id = 1 };
 
         _serviceMock.Setup(s => s.UpdateCollectionAsync(1, dto)).ReturnsAsync(response);
 
@@ -83,8 +83,8 @@ public class CollectionsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-        var returnedDto = Assert.IsType<CollectionResponseDto>(actionResult.Value);
-        Assert.Equal(1, returnedDto.Id);
+        var returnedViewModel = Assert.IsType<CollectionResponseViewModel>(actionResult.Value);
+        Assert.Equal(1, returnedViewModel.Id);
     }
 
     [Fact]

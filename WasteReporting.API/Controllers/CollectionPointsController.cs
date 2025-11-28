@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 
 namespace WasteReporting.API.Controllers;
@@ -21,7 +21,7 @@ public class CollectionPointsController : ControllerBase
     /// Creates a new Collection Point.
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult<CollectionPointDto>> Create(CreateCollectionPointDto dto)
+    public async Task<ActionResult<CollectionPointViewModel>> Create(CreateCollectionPointViewModel dto)
     {
         var result = await _service.CreateCollectionPointAsync(dto);
         return CreatedAtAction(nameof(Create), new { id = result.Id }, result);

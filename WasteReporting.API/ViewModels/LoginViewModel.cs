@@ -1,12 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WasteReporting.API.DTOs;
+namespace WasteReporting.API.ViewModels;
 
-public class RegisterDto
+public class LoginViewModel
 {
-    [Required]
-    public string Username { get; set; } = string.Empty;
-
     [Required]
     [EmailAddress]
     public string Email { get; set; } = string.Empty;

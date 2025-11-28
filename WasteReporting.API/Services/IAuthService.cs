@@ -1,9 +1,9 @@
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 
 namespace WasteReporting.API.Services;
 
 public interface IAuthService
 {
-    Task<AuthResponseDto> RegisterAsync(RegisterDto dto);
-    Task<AuthResponseDto> LoginAsync(LoginDto dto);
+    Task<AuthResponseViewModel> RegisterAsync(RegisterViewModel dto);
+    Task<AuthResponseViewModel> LoginAsync(LoginViewModel dto);
 }

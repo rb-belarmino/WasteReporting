@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 
 namespace WasteReporting.API.Controllers;
@@ -21,7 +21,7 @@ public class CollectionWastesController : ControllerBase
     /// Associates a waste type with a collection.
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult> Associate(CreateCollectionWasteDto dto)
+    public async Task<ActionResult> Associate(CreateCollectionWasteViewModel dto)
     {
         await _service.AssociateWasteAsync(dto);
         return Ok(new { message = "Waste associated successfully." });
@@ -48,7 +48,7 @@ public class CollectionWastesController : ControllerBase
     /// Lists all associations between collections and wastes.
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CollectionWasteResponseDto>>> ListAll()
+    public async Task<ActionResult<IEnumerable<CollectionWasteResponseViewModel>>> ListAll()
     {
         var result = await _service.ListAssociationsAsync();
         return Ok(result);

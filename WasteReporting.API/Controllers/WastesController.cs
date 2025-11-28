@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WasteReporting.API.DTOs;
+using WasteReporting.API.ViewModels;
 using WasteReporting.API.Services;
 
 namespace WasteReporting.API.Controllers;
@@ -21,7 +21,7 @@ public class WastesController : ControllerBase
     /// Creates a new Waste type.
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult<WasteDto>> Create(CreateWasteDto dto)
+    public async Task<ActionResult<WasteViewModel>> Create(CreateWasteViewModel dto)
     {
         var result = await _service.CreateWasteAsync(dto);
         return CreatedAtAction(nameof(Create), new { id = result.Id }, result);
@@ -31,7 +31,7 @@ public class WastesController : ControllerBase
     /// Lists all registered waste types.
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<WasteDto>>> ListAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    public async Task<ActionResult<IEnumerable<WasteViewModel>>> ListAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var result = await _service.ListWastesAsync(page, pageSize);
         return Ok(result);

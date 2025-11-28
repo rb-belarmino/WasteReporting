@@ -1,6 +1,6 @@
-namespace WasteReporting.API.DTOs;
+namespace WasteReporting.API.ViewModels;
 
-public class ReportResponseDto
+public class ReportResponseViewModel
 {
     public int Id { get; set; }
     public string Location { get; set; } = string.Empty;

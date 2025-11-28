@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WasteReporting.API.DTOs;
+namespace WasteReporting.API.ViewModels;
 
-public class CreateReportDto
+public class CreateReportViewModel
 {
     [Required]
     public string Location { get; set; } = string.Empty;
