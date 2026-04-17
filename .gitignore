@@ -236,3 +236,7 @@ orleans.codegen.cs
 
 # macOS
 .DS_Store
+
+# IDE
+.idea/
+.vscode/

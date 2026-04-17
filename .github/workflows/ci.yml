@@ -1,0 +1,37 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches: ['main']
+  # Permite que este workflow seja chamado por outro (CD)
+  workflow_call:
+
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore WasteReporting.sln
+
+      - name: Build
+        run: dotnet build WasteReporting.sln --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test WasteReporting.sln --no-build --configuration Release --verbosity normal
+
+      - name: Publish API
+        run: dotnet publish WasteReporting.API/WasteReporting.API.csproj -c Release -o ./publish
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-artifact
+          path: ./publish

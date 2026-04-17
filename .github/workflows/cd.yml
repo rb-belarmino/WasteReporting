@@ -1,0 +1,48 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: ['main', 'develop']
+
+jobs:
+  # Chama o workflow de CI para garantir que o build e os testes passem
+  call-ci:
+    uses: ./.github/workflows/ci.yml
+
+  deploy-staging:
+    needs: call-ci
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-24.04
+    environment: staging
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: api-artifact
+          path: ./publish
+
+      - name: Deploy to Azure Web App (Staging)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'waste-reporting-api-staging'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
+          package: ./publish
+
+  deploy-production:
+    needs: call-ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: production
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: api-artifact
+          path: ./publish
+
+      - name: Deploy to Azure Web App (Production)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'waste-reporting-api-prod'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PRODUCTION }}
+          package: ./publish

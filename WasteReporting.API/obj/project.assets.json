@@ -3294,11 +3294,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
+      "projectUniqueName": "/Users/rodrigobelarmino/Documents/DEV/FIAP/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
       "projectName": "WasteReporting.API",
-      "projectPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
+      "projectPath": "/Users/rodrigobelarmino/Documents/DEV/FIAP/WasteReporting/WasteReporting.API/WasteReporting.API.csproj",
       "packagesPath": "/Users/rodrigobelarmino/.nuget/packages/",
-      "outputPath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.API/obj/",
+      "outputPath": "/Users/rodrigobelarmino/Documents/DEV/FIAP/WasteReporting/WasteReporting.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/rodrigobelarmino/.nuget/NuGet/NuGet.Config"
@@ -3325,7 +3325,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -3373,6 +3373,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -3381,7 +3395,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

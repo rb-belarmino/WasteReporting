@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0MiHMnia7tY=",
+  "dgSpecHash": "BZaCVzNaG1w=",
   "success": true,
-  "projectFilePath": "/Users/rodrigobelarmino/Desktop/WasteReporting/WasteReporting/WasteReporting.Tests/WasteReporting.Tests.csproj",
+  "projectFilePath": "/Users/rodrigobelarmino/Documents/DEV/FIAP/WasteReporting/WasteReporting.Tests/WasteReporting.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/rodrigobelarmino/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/rodrigobelarmino/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
@@ -57,7 +57,9 @@
     "/Users/rodrigobelarmino/.nuget/packages/xunit.core/2.9.2/xunit.core.2.9.2.nupkg.sha512",
     "/Users/rodrigobelarmino/.nuget/packages/xunit.extensibility.core/2.9.2/xunit.extensibility.core.2.9.2.nupkg.sha512",
     "/Users/rodrigobelarmino/.nuget/packages/xunit.extensibility.execution/2.9.2/xunit.extensibility.execution.2.9.2.nupkg.sha512",
-    "/Users/rodrigobelarmino/.nuget/packages/xunit.runner.visualstudio/2.8.2/xunit.runner.visualstudio.2.8.2.nupkg.sha512"
+    "/Users/rodrigobelarmino/.nuget/packages/xunit.runner.visualstudio/2.8.2/xunit.runner.visualstudio.2.8.2.nupkg.sha512",
+    "/Users/rodrigobelarmino/.nuget/packages/microsoft.netcore.app.ref/9.0.12/microsoft.netcore.app.ref.9.0.12.nupkg.sha512",
+    "/Users/rodrigobelarmino/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.12/microsoft.aspnetcore.app.ref.9.0.12.nupkg.sha512"
   ],
   "logs": []
 }
