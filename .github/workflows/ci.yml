@@ -3,9 +3,7 @@ name: Continuous Integration
 on:
   pull_request:
     branches: ['main']
-  # Permite que este workflow seja chamado por outro (CD)
   workflow_call:
-
 
 jobs:
   build-and-test:
@@ -28,7 +26,7 @@ jobs:
         run: dotnet test WasteReporting.sln --no-build --configuration Release --verbosity normal
 
       - name: Publish API
-        run: dotnet publish WasteReporting.API/WasteReporting.API.csproj -c Release -o ./publish
+        run: dotnet publish src/WasteReporting.API/WasteReporting.API.csproj -c Release -o ./publish
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

@@ -3,7 +3,7 @@ services:
     image: wastereporting-api
     build:
       context: .
-      dockerfile: WasteReporting.API/Dockerfile
+      dockerfile: src/WasteReporting.API/Dockerfile
     ports:
       - "5001:8080"
     environment:
