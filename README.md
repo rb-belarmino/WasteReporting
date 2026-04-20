@@ -30,7 +30,7 @@ Para subir a aplicação e suas dependências localmente, siga os passos abaixo:
 O projeto utiliza **GitHub Actions** para automação de processos, dividido em dois workflows principais:
 
 *   **CI (Integração Contínua)**: 
-    - Executado em cada Pull Request para a branch `main`.
+    - Executado em cada Pull Request para as branches `main` e `develop`.
     - Realiza o **Build** da solução.
     - Executa os **Testes Automatizados** (xUnit).
     - Gera os artefatos de publicação (Publish).
