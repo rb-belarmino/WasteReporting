@@ -2,15 +2,6 @@
 
 API RESTful desenvolvida em .NET 9 para gestão de denúncias de descarte irregular de resíduos, visando promover cidades mais sustentáveis (ESG).
 
-## 🚀 Tecnologias Utilizadas
-
-*   **.NET 9** (Web API)
-*   **Oracle Database** (Entity Framework Core)
-*   **JWT** (JSON Web Token) para Autenticação
-*   **xUnit + Moq** para Testes Unitários
-*   **Docker & Docker Compose** para Containerização e Orquestração
-*   **GitHub Actions** para Pipeline CI/CD
-*   **Azure Web App** para Hospedagem em Staging e Produção
 
 ## 🐳 Como executar localmente com Docker
 
@@ -72,6 +63,23 @@ A orquestração via **Docker Compose** permite configurar variáveis de ambient
 ├── docker-compose.yml  # Orquestração de serviços
 └── WasteReporting.sln  # Solução do Visual Studio
 ```
+## Tecnologias utilizadas
+
+### Stack Principal
+*   **Linguagem:** C#
+*   **Framework:** .NET 9 (Web API)
+*   **Banco de Dados:** Oracle Database (via Entity Framework Core 9)
+*   **Segurança:** JWT Bearer Authentication & BCrypt para hashing de senhas.
+
+### Ferramentas & DevOps
+*   **Containerização:** Docker & Docker Compose
+*   **CI/CD:** GitHub Actions (Pipelines de integração e entrega)
+*   **Cloud Hosting:** Azure App Service (Web Apps para Linux)
+
+### Testes & Qualidade
+*   **Unit Testing:** xUnit
+*   **Mocking:** Moq
+
 
 ## ✅ Checklist de Entrega
 
