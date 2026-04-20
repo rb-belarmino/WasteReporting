@@ -44,12 +44,14 @@ A orquestração via **Docker Compose** permite configurar variáveis de ambient
 
 ## 📸 Prints do funcionamento
 
-_Os prints devem ser incluídos aqui pelo usuário após a execução:_
+### 1. Pipeline CI/CD (GitHub Actions) Sucesso
+![GitHub Actions Success](docs/screenshots/github-actions.png)
 
-- [ ] Print do Build/Testes passando no GitHub Actions.
-- [ ] Print do Deploy realizado com sucesso no Azure.
-- [ ] Print da API rodando no ambiente de Staging.
-- [ ] Print da API rodando no ambiente de Produção.
+### 2. Ambiente de Produção (Swagger)
+![Swagger Production](docs/screenshots/swagger-prod.png)
+
+### 3. Ambiente de Staging (Swagger)
+![Swagger Staging](docs/screenshots/swagger-staging.png)
 
 ## 📁 Estrutura do Projeto
 
