@@ -6,6 +6,10 @@ services:
       dockerfile: src/WasteReporting.API/Dockerfile
     ports:
       - '5001:8080'
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - eth-network
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - ConnectionStrings__DatabaseConnection=${DATABASE_CONNECTION}
@@ -13,3 +17,10 @@ services:
       - JwtSettings__Issuer=${JWT_ISSUER}
       - JwtSettings__Audience=${JWT_AUDIENCE}
       - JwtSettings__ExpirationMinutes=${JWT_EXPIRATION_MINUTES}
+
+networks:
+  eth-network:
+    driver: bridge
+
+volumes:
+  logs:
