@@ -240,3 +240,4 @@ orleans.codegen.cs
 # IDE
 .idea/
 .vscode/
+.env
