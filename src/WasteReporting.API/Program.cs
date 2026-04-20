@@ -1,3 +1,5 @@
+// Waste Reporting API - Version 1.0.0
+// Final build for FIAP ESG Project
 using Microsoft.EntityFrameworkCore;
 using Oracle.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
