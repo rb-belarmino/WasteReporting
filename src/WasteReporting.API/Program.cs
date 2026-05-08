@@ -42,8 +42,16 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseOracle(builder.Configuration.GetConnectionString("DatabaseConnection"), b => b.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19)));
+if (builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseInMemoryDatabase("WasteReportingTestDB"));
+}
+else
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseOracle(builder.Configuration.GetConnectionString("DatabaseConnection"), b => b.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19)));
+}
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReportService, ReportService>();
@@ -86,5 +94,25 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+if (app.Environment.IsEnvironment("Testing"))
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        context.Database.EnsureCreated();
+        if (!context.Users.Any(u => u.Email == "admin@esg.com"))
+        {
+            context.Users.Add(new WasteReporting.API.Models.User
+            {
+                Username = "Admin Seed",
+                Email = "admin@esg.com",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("SenhaForte123!"),
+                Role = "Admin"
+            });
+            context.SaveChanges();
+        }
+    }
+}
 
 app.Run();

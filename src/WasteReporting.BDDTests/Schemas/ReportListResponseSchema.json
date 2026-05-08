@@ -1,0 +1,15 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "integer" },
+      "location": { "type": "string" },
+      "description": { "type": "string" },
+      "status": { "type": "string" },
+      "createdAt": { "type": "string", "format": "date-time" },
+      "userName": { "type": "string" }
+    },
+    "required": ["id", "location", "description", "status", "createdAt", "userName"]
+  }
+}

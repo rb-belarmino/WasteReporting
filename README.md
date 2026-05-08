@@ -4,16 +4,25 @@ API RESTful desenvolvida em .NET 9 para gestão de denúncias de descarte irregu
 
 ## 🐳 Como executar localmente com Docker
 
-Para subir a aplicação e suas dependências localmente, siga os passos abaixo:
+Para subir a aplicação localmente, há dois arquivos `docker-compose` disponíveis:
 
-1.  Certifique-se de ter o **Docker** e o **Docker Compose** instalados.
-2.  Clone o repositório.
-3.  (Opcional) Ajuste as variáveis de ambiente no `docker-compose.yml` ou crie um arquivo `.env` baseado no `.env.example`.
-4.  Execute o comando na raiz do projeto:
-    ```bash
-    docker-compose up --build
-    ```
-5.  A API estará disponível em: `http://localhost:5001/swagger`
+### 1. Aplicação Principal (`docker-compose.yml`)
+Sobe a aplicação juntamente com suas dependências de produção (como o banco de dados Oracle).
+1. Certifique-se de ter o Docker instalado.
+2. Ajuste as variáveis no `.env` (opcional).
+3. Execute na raiz:
+   ```bash
+   docker-compose up --build
+   ```
+4. Acesse a API em `http://localhost:5001/swagger`.
+
+### 2. Ambiente de Testes Automatizados (`docker-compose.test.yml`)
+Sobe a aplicação utilizando um banco de dados em memória e executa automaticamente a bateria de testes BDD (SpecFlow).
+1. Execute na raiz:
+   ```bash
+   docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
+   ```
+2. Acompanhe os cenários passando com sucesso no console do container `bdd-tests`.
 
 ## 🚀 Pipeline CI/CD
 
@@ -86,3 +95,21 @@ A orquestração via **Docker Compose** permite configurar variáveis de ambient
 
 - **Unit Testing:** xUnit
 - **Mocking:** Moq
+- **BDD/API Testing:** SpecFlow, RestSharp, FluentAssertions, Newtonsoft.Json.Schema
+
+## ✅ Qualidade e Testes Automatizados (BDD)
+
+Este projeto implementa Testes Automatizados aplicando **Behavior Driven Development (BDD)** com Gherkin e SpecFlow, visando validar o comportamento da API e garantir a conformidade dos contratos via JSON Schema.
+
+### Estrutura do Projeto de Testes (`WasteReporting.BDDTests`)
+- `Features/`: Arquivos `.feature` contendo os cenários em Gherkin.
+- `Steps/`: Definição dos passos em C# que mapeiam os cenários para chamadas HTTP.
+- `Schemas/`: Arquivos JSON contendo a estrutura esperada das respostas da API.
+
+### 📝 Matriz de Rastreabilidade (Desafio ESG)
+
+| Requisito ESG | Funcionalidade Testada | Resultado Esperado |
+| ------------- | --------------- | ------------------ |
+| **Governança e Compliance** | `Auth.feature` e `Management.feature` | Acesso bloqueado para não-autenticados; Validação estrita do token JWT via Schema. Cadastros de entidades base protegidos. |
+| **Gestão de Resíduos** | `Reports.feature` e `Collections.feature` | Relato de descarte irregular inserido com sucesso; Associações corretas entre coletas e resíduos reciclados. |
+| **Rastreabilidade** | `Reports.feature` e `Collections.feature` | Auditoria, histórico de envios do cidadão listados corretamente e rastreio de coletas atualizadas pelo admin. |
