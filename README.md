@@ -12,7 +12,7 @@ Sobe a aplicação juntamente com suas dependências de produção (como o banco
 2. Ajuste as variáveis no `.env` (opcional).
 3. Execute na raiz:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 4. Acesse a API em `http://localhost:5001/swagger`.
 
@@ -20,7 +20,7 @@ Sobe a aplicação juntamente com suas dependências de produção (como o banco
 Sobe a aplicação utilizando um banco de dados em memória e executa automaticamente a bateria de testes BDD (SpecFlow).
 1. Execute na raiz:
    ```bash
-   docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
+   docker compose -f docker-compose.test.yml up --build --abort-on-container-exit
    ```
 2. Acompanhe os cenários passando com sucesso no console do container `bdd-tests`.
 

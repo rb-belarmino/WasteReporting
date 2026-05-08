@@ -26,7 +26,7 @@ jobs:
         run: dotnet test src/WasteReporting.Tests/WasteReporting.Tests.csproj --no-build --configuration Release --verbosity normal
 
       - name: Run BDD Automated Tests
-        run: docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from bdd-tests
+        run: docker compose -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from bdd-tests
 
       - name: Publish API
         run: dotnet publish src/WasteReporting.API/WasteReporting.API.csproj -c Release -o ./publish
